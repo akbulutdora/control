@@ -28,7 +28,7 @@ Line :: struct {
 	pos_y:               i32,
 	direction:           Direction,
 	speed:               i32,
-	cars:                ^[dynamic]Car,
+	cars:                [dynamic]Car,
 	last_car_spawned_at: t.Time,
 }
 
@@ -49,9 +49,9 @@ main :: proc() {
 	cars3 := make([dynamic]Car)
 
 	lines: [dynamic]Line
-	append(&lines, Line{pos_y = WINDOW_HEIGHT - LINE_HEIGHT - 200, speed = 200, cars = &cars1})
-	append(&lines, Line{pos_y = WINDOW_HEIGHT - 2 * LINE_HEIGHT - 200, speed = 200, cars = &cars2})
-	append(&lines, Line{pos_y = WINDOW_HEIGHT - 3 * LINE_HEIGHT - 200, speed = 400, cars = &cars3})
+	append(&lines, Line{pos_y = WINDOW_HEIGHT - LINE_HEIGHT - 200, speed = 200, cars = cars1})
+	append(&lines, Line{pos_y = WINDOW_HEIGHT - 2 * LINE_HEIGHT - 200, speed = 200, cars = cars2})
+	append(&lines, Line{pos_y = WINDOW_HEIGHT - 3 * LINE_HEIGHT - 200, speed = 400, cars = cars3})
 
 	game_loop: for !rl.WindowShouldClose() {
 		delta_time := rl.GetFrameTime()
@@ -77,7 +77,7 @@ main :: proc() {
 			// will i spawn a car
 			if t.duration_seconds(t.since(line.last_car_spawned_at)) >= 3 {
 				append(
-					line.cars,
+					&line.cars,
 					Car {
 						pos_x = line.direction == Direction.RIGHT ? 0 : WINDOW_WIDTH - CAR_WIDTH,
 						color = rl.YELLOW,
@@ -87,7 +87,7 @@ main :: proc() {
 			}
 
 			// draw all cars
-			for car in line.cars {
+			for car in &line.cars {
 				car.pos_x += i32(
 					f32(line.direction == Direction.LEFT ? -line.speed : line.speed) * delta_time,
 				)
