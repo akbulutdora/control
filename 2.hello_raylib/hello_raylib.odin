@@ -44,14 +44,27 @@ main :: proc() {
 	rl.SetTargetFPS(FPS)
 	defer rl.CloseWindow()
 
-	cars1 := make([dynamic]Car)
-	cars2 := make([dynamic]Car)
-	cars3 := make([dynamic]Car)
-
 	lines: [dynamic]Line
-	append(&lines, Line{pos_y = WINDOW_HEIGHT - LINE_HEIGHT - 200, speed = 200, cars = cars1})
-	append(&lines, Line{pos_y = WINDOW_HEIGHT - 2 * LINE_HEIGHT - 200, speed = 200, cars = cars2})
-	append(&lines, Line{pos_y = WINDOW_HEIGHT - 3 * LINE_HEIGHT - 200, speed = 400, cars = cars3})
+	append(
+		&lines,
+		Line{pos_y = WINDOW_HEIGHT - LINE_HEIGHT - 200, speed = 200, cars = make([dynamic]Car)},
+	)
+	append(
+		&lines,
+		Line {
+			pos_y = WINDOW_HEIGHT - 2 * LINE_HEIGHT - 200,
+			speed = 200,
+			cars = make([dynamic]Car),
+		},
+	)
+	append(
+		&lines,
+		Line {
+			pos_y = WINDOW_HEIGHT - 3 * LINE_HEIGHT - 200,
+			speed = 400,
+			cars = make([dynamic]Car),
+		},
+	)
 
 	game_loop: for !rl.WindowShouldClose() {
 		delta_time := rl.GetFrameTime()
