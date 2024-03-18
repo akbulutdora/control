@@ -1,0 +1,16 @@
+version: 3
+
+tasks:
+  default:
+    cmds:
+      - task: test
+
+  test:
+    cmds:
+      - odin test hello_task
+    aliases:
+      - t
+    method: none
+    silent: true
+    sources:
+      - ./hello_task/*.odin
