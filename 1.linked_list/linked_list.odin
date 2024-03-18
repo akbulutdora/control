@@ -27,10 +27,5 @@ do_plain_linked_list :: proc() {
 }
 
 main :: proc() {
-	i : f32 = 5.2
-	fmt.println(i)
-
-	fmt.println(i % 3)
-	
 	do_plain_linked_list()
 }
