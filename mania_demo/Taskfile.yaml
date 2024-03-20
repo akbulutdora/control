@@ -1,0 +1,26 @@
+version: 3
+
+tasks:
+  default:
+    cmds:
+      - task: test
+
+  run:
+    cmds:
+      - odin run mania_demo
+    aliases:
+      - r
+    method: none
+    silent: false
+    sources:
+      - ./mania_demo/*.odin
+
+  test:
+    cmds:
+      - odin test mania_demo
+    aliases:
+      - t
+    method: none
+    silent: true
+    sources:
+      - ./mania_demo/*.odin
