@@ -1,2 +1,7 @@
-
+1.linked_list/1.linked_list
 linked_list/linked_list
+*.DS_Store
+*.plist
+*.bin
+*.dsym
+mania_demo/mania
