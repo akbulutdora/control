@@ -24,3 +24,13 @@ tasks:
     silent: true
     sources:
       - ./mania_demo/*.odin
+
+  debug:
+    cmds:
+      - odin build mania_demo --debug --out="./mania"
+    aliases:
+      - d
+    method: none
+    silent: false
+    sources:
+      - ./mania_demo/*.odin
